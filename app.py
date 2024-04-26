@@ -27,7 +27,7 @@ def make_predictions(model, data, scaler, num_days):
 def main():
     st.title("USDX Price Prediction App")
     
-    model_lstm = load_model("model_lstm_second.h5")
+    model_lstm = load_model("model_lstm.h5")
     model_rnn = load_model("model_rnn_forex.h5")
     
     st.sidebar.header("Navigation")
