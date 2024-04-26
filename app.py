@@ -4,6 +4,7 @@ import pandas as pd
 import yfinance as yf
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras.initializers import Orthogonal
 import plotly.express as px
 import traceback
 
