@@ -10,9 +10,9 @@ from datetime import datetime
 # Function to load the model safely
 def load_model_safely(model_path):
     try:
-        from tensorflow.keras.initializers import Orthogonal
-        custom_objects = {'Orthogonal': Orthogonal}
-        return load_model(model_path, custom_objects=custom_objects)
+        from tensorflow.keras.layers import SimpleRNN
+        custom_objects = {'Orthogonal': Orthogonal, 'SimpleRNN': SimpleRNN}
+        return load_model(model_path, custom_objects=custom_objects, compile=False)
     except Exception as e:
         st.error(f"Failed to load model from {model_path}. Error: {str(e)}")
         return None
