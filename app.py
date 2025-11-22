@@ -11,14 +11,27 @@ from tensorflow.keras.initializers import Orthogonal
 
 def load_model_safely(model_path):
     try:
+        from tensorflow.keras.layers import LSTM, SimpleRNN
+
+        def lstm_fixed(*args, **kwargs):
+            kwargs.pop("time_major", None)
+            return LSTM(*args, **kwargs)
+
+        def rnn_fixed(*args, **kwargs):
+            kwargs.pop("time_major", None)
+            return SimpleRNN(*args, **kwargs)
+
         custom_objects = {
-            'Orthogonal': Orthogonal,
-            'SimpleRNN': SimpleRNN
+            "LSTM": lstm_fixed,
+            "SimpleRNN": rnn_fixed,
         }
+
         return load_model(model_path, custom_objects=custom_objects, compile=False)
+
     except Exception as e:
         st.error(f"Failed to load model from {model_path}. Error: {str(e)}")
         return None
+
 
 # Function to fetch data from Yahoo Finance
 def get_data(symbol, interval='1m', period='7d'):
